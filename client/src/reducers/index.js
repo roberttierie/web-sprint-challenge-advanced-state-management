@@ -1,11 +1,33 @@
-
+import { STARTING_FETCH, ADDING_DATA, ADDING_SMURF, FETCHING_ERROR } from '../actions/index';
 export const initialState = {
+    smurfs: [],
+    isFetching: false,
+    error: '',
 }
 
-const reducer = ()=>{
+export const smurfReducer = (state = initialState, action)=>{
+    switch (action.type) {
+        case STARTING_FETCH:
+            return ({
+                ...state,
+                isFetching: true
+            });
+        case ADDING_DATA:
+            return ({
+                ...state,
+                smurfs: action.payload,
+                isFetching: false
+            });
+        case FETCHING_ERROR:
+            return({
+                ...state,
+                error: action.payload
+            });
+        default:
+            return state;
+    }
 }
-
-export default reducer;
+export default smurfReducer;
 
 //Task List:
 //1. Add in the initialState needed to hold: 
